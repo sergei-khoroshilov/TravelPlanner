@@ -1,0 +1,43 @@
+﻿<div ng-controller="LoginController">
+
+    <h3>Login</h3>
+
+    <form class="form-horizontal" name="loginForm" novalidate>
+
+        <div class="form-group" ng-show="validationErrors">
+            <div class="col-sm-6 alert alert-danger">
+                <ul>
+                    <li ng-repeat="error in validationErrors">{{error}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-4">
+                <input ng-model="user.email" name="email" type="email" class="form-control" required placeholder="Email" />
+                <span ng-show="loginForm.email.$touched && loginForm.email.$error.required">Email is required</span>
+                <span ng-show="loginForm.email.$touched && loginForm.email.$error.email">Email must be valid email address</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-4">
+                <input ng-model="user.password" name="password" type="password" class="form-control" required placeholder="Password" />
+                <span ng-show="loginForm.password.$touched && loginForm.password.$error.required">Password is required</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-3 col-sm-offset-2">
+                <input type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid" value="Login" ng-click="login(user)" />
+            </div>
+            <div>
+                <a class="btn" href="#/users/new">Register</a>
+            </div>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,53 @@
+﻿<div ng-controller="TripAddController">
+    
+    <h3>{{title}}</h3>    
+
+    <form class="form-horizontal" name="tripsForm" novalidate>
+
+        <div class="form-group" ng-show="validationErrors">
+            <div class="col-sm-6 alert alert-danger">
+                <ul>
+                    <li ng-repeat="error in validationErrors">{{error}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label required">Destination</label>
+            <div class="col-sm-4">
+                <input class="form-control" ng-model="trip.destination" name="destination" required placeholder="Destination" />
+                <span ng-show="tripsForm.destination.$touched && tripsForm.destination.$error.required">Destination is required</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Start date</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" ng-model="trip.startDate" name="startDate" datepicker required />
+                <span ng-show="tripsForm.startDate.$touched && tripsForm.startDate.$error.required">Start date is required</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">End date</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" ng-model="trip.endDate" name="endDate" datepicker required />
+                <span ng-show="tripsForm.endDate.$touched && tripsForm.endDate.$error.required">End date is required</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Comment</label>
+            <div class="col-sm-4">
+                <textarea class="form-control" ng-model="trip.comment" name="comment" placeholder="Comment" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-2">
+                <input type="submit" class="btn btn-primary" ng-disabled="tripsForm.$invalid" value="Save" ng-click="save(trip)" />
+            </div>
+        </div>
+    </form>
+
+</div>

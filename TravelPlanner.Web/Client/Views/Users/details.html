@@ -1,0 +1,62 @@
+﻿<div ng-controller="UserAddController">
+    <h3>{{title}}</h3>
+
+    <form class="form-horizontal" name="createForm" novalidate>
+        
+        <div class="form-group" ng-show="validationErrors">
+            <div class="col-sm-6 alert alert-danger">
+                <ul>
+                    <li ng-repeat="error in validationErrors">{{error}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-4">
+                <input ng-model="user.email" ng-readonly="action == 'edit'" name="email" type="email" class="form-control" required placeholder="Email" />
+                <span ng-show="createForm.email.$touched && createForm.email.$error.required">Email is required</span>
+                <span ng-show="createForm.email.$touched && createForm.email.$error.email">Email must be valid email address</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-4">
+                <input ng-model="user.name" name="name" class="form-control" required placeholder="Name" />
+                <span ng-show="createForm.name.$touched && createForm.name.$error.required">Name is required</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="auth.hasRole('Admin') || auth.hasRole('Manager')">
+            <label class="col-sm-2 control-label">Type</label>
+            <div class="col-sm-4">
+                <select name="userType" ng-model="userType" class="form-control"
+                        ng-options="type as type.name for type in userTypes">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-4">
+                <input ng-model="user.password" name="password" type="password" class="form-control" required placeholder="Password" />
+                <span ng-show="createForm.password.$touched && createForm.password.$error.required">Password is required</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Confirm password</label>
+            <div class="col-sm-4">
+                <input ng-model="user.confirmPassword" compare-to="user.password" name="confirmPassword" type="password" class="form-control" required placeholder="Confirm password" />
+                <span ng-show="createForm.confirmPassword.$touched && createForm.confirmPassword.$error.compareTo">Password is not confirmed</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-2">
+                <input type="submit" class="btn btn-primary" ng-disabled="createForm.$invalid" value="Save" ng-click="save(user)" />
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/angular-messages.min.js"></script>
+    <script src="~/Scripts/ngStorage.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+
+    <script src="~/Client/Scripts/ValidationErrors.js"></script>
+    <script src="~/Client/Scripts/TravelPlannerApp.js"></script>
+    <script src="~/Client/Scripts/Constants.js"></script>
+    <script src="~/Client/Scripts/Services/AuthService.js"></script>
+    <script src="~/Client/Scripts/Interceptors/HttpAuthInterceptor.js"></script>
+    <script src="~/Client/Scripts/Routing.js"></script>
+
+    <script src="~/Client/Directives/datepicker.js"></script>
+    <script src="~/Client/Directives/compareTo.js"></script>
+
+    <script src="~/Client/Scripts/Services/UserService.js"></script>
+    <script src="~/Client/Scripts/Services/TripService.js"></script>
+
+    <script src="~/Client/Scripts/ErrorController.js"></script>
+    <script src="~/Client/Scripts/Users/LoginController.js"></script>
+    <script src="~/Client/Scripts/Users/UserListController.js"></script>
+    <script src="~/Client/Scripts/Users/UserAddController.js"></script>
+    <script src="~/Client/Scripts/Trips/TripListController.js"></script>
+    <script src="~/Client/Scripts/Trips/TripAddController.js"></script>
+    <script src="~/Client/Scripts/Trips/TripPlanController.js"></script>
+}
+
+<div ng-app="TravelPlannerApp">
+    <div ng-controller="LoginController">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <p class="navbar-brand">Travel planner</p>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ng-if="auth.hasRole('Admin') || auth.hasRole('Manager')">
+                            <a href="#/users">Users</a>
+                        </li>
+                        <li ng-if="auth.hasRole('User') || auth.hasRole('Admin')">
+                            <a href="#/users/{{authUser.id}}/trips">My trips</a>
+                        </li>
+                        <li ng-if="auth.hasRole('User') || auth.hasRole('Admin')">
+                            <a href="#/users/{{authUser.id}}/trips/plan">My travel plan</a>
+                        </li>
+                    </ul>
+
+                    <ul ng-if="auth.isLoggedIn()" class="nav navbar-nav navbar-right">
+                        <li><a href="#/users/{{authUser.id}}">{{authUser.email}} ({{authUserTypeName}})</a></li>
+                        <li><a href="" ng-click="logout()">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <ng-view>
+        </ng-view>
+    </div>
+</div>

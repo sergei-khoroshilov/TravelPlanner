@@ -1,0 +1,21 @@
+﻿body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+input.ng-invalid.ng-touched {
+    border-color: red;
+    outline-color: red;
+}
+
+.control-label.required .control-label:after {
+  content: " *";
+  color: red;
+  font-family: 'Glyphicons Halflings';
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.comment {
+    max-width: 120px;
+}

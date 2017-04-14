@@ -1,0 +1,10 @@
+﻿<div ng-controller="TripPlanController">
+
+    <h3>Travel plan for {{nextMonth}}</h3>
+
+    <ul>
+        <li ng-repeat="trip in trips">
+            {{trip.startDate | date : format : mediumDate}} - {{trip.endDate | date : format : mediumDate}} {{trip.destination}}
+        </li>
+    </ul>
+</div>

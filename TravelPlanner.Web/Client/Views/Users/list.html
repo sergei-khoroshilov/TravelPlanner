@@ -1,0 +1,31 @@
+﻿<div ng-controller="UserListController">
+    
+    <h3>Users</h3>
+
+    <a href="#/users/new">Create new</a>
+
+    <table class="container table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th ng-if="auth.hasRole('Admin')"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{getUserTypeName(user.type)}}</td>
+                <td ng-if="auth.hasRole('Admin')">
+                    <a href="#/users/{{user.id}}/trips">Trips</a>
+                </td>
+                <td>
+                    <a href="#/users/{{user.id}}">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
